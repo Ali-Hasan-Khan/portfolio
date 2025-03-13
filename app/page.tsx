@@ -159,7 +159,7 @@ export default function Home() {
             </Link>
           </Button>
           <Button variant="outline" size="icon" className="bg-gray-900 text-gray-400 hover:text-gray-300 border-gray-600">
-            <Link href="https://www.linkedin.com/in/ali-hasan-khan">
+            <Link href="https://www.linkedin.com/in/ali-hasan-khan-56808b123">
               <FiLinkedin className="h-6 w-6" />
             </Link>
           </Button>
