@@ -4,29 +4,32 @@ import { motion } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
 import Link from 'next/link';
 
+const links = [
+  { name: "About", href: "/" },
+  { name: "Projects", href: "https://github.com/Ali-Hasan-Khan" },
+  { name: "Contact", href: "mailto:alihasank86@gmail.com" },
+  { name: "Resume", href: "https://drive.google.com/file/d/1HrVtTOBTWZl7OxY_2JUUtD4iYOcnTYqG/view?usp=sharing" }
+];
+
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
-  const links = [
-    { name: 'Home', href: '/' },
-    { name: 'Projects', href: 'https://github.com/Ali-Hasan-Khan' },
-    { name: 'Resume', href: 'https://drive.google.com/file/d/1HrVtTOBTWZl7OxY_2JUUtD4iYOcnTYqG/view?usp=drive_link'},
-  ];
 
   return (
-    <nav className="bg-gray-950/80 backdrop-blur-md border-b border-gray-800 fixed w-full z-50">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-            Ali Hasan Khan
-          </Link>
-          
-          {/* Desktop Navigation */}
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex-shrink-0">
+            <Link href="/" className="text-white font-bold text-xl">
+              Ali Hasan Khan
+            </Link>
+          </div>
+
           <div className="hidden md:flex space-x-8">
             {links.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-gray-300 hover:text-cyan-400 transition-colors duration-300"
+                className="text-gray-300 hover:text-purple-400 transition-colors duration-300"
                 {...(link.name === 'Resume' ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >
                 {link.name}

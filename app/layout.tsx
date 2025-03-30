@@ -17,9 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gradient-to-b from-gray-950 to-slate-900 min-h-screen text-gray-100`}>
+      <body className={`${inter.className} bg-black min-h-screen text-gray-100`}>
         <Nav />
-        <main className="container mx-auto px-4 py-8">
+        <main className="container mx-auto px-4 py-8 bg-black">
           {children}
         </main>
       </body>
