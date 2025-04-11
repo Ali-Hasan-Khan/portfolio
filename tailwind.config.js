@@ -54,7 +54,10 @@ module.exports = {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
-  		}
+  		},
+  		gridTemplateColumns: {
+  			'52': 'repeat(52, minmax(0, 1fr))',
+  		},
   	}
   },
   plugins: [require("tailwindcss-animate")],

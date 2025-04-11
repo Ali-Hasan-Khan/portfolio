@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-black min-h-screen text-gray-100`}>
         <Nav />
-        <main className="container mx-auto px-4 py-8 bg-black">
+        <main className="container mx-auto md:mx-0 px-0 py-0 bg-black">
           {children}
         </main>
       </body>
