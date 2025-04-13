@@ -17,7 +17,7 @@ export default function Nav() {
   return (
     <nav className="fixed w-full z-50 bg-black/90 backdrop-blur-sm border-b border-gray-800">
       <div className="max-w-4xl mx-auto px-4">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between h-16 md:ml-[82px]">
           <div className="flex items-center">
             <Link href="/" className="text-xl font-mono tracking-wider text-white">
               ALI HASAN

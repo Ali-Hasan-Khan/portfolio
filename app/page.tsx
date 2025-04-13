@@ -1,16 +1,28 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { FiGithub, FiLinkedin, FiMail, FiExternalLink, FiCode, FiBriefcase } from 'react-icons/fi'
 import { AnimatedBeam } from "@/components/magicui/animated-beam"
 import { FlickeringGrid } from "@/components/magicui/flickering-grid"
+
 export default function Home() {
   const [contributionData, setContributionData] = useState<number[]>([])
   const [totalContributions, setTotalContributions] = useState(0)
-  const contributionMonths = ['Apr', 'Mar', 'Feb', 'Jan', 'Dec', 'Nov', 'Oct', 'Sep', 'Aug', 'Jul', 'Jun', 'May']
-
+  const contributionMonths = useMemo(() => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const currentMonth = new Date().getMonth(); // 0-11
+    
+    // Get 12 months starting from next month of previous year
+    const orderedMonths = [];
+    for (let i = 0; i < 12; i++) {
+      const monthIndex = (currentMonth + 1 + i) % 12;
+      orderedMonths.push(months[monthIndex]);
+    }
+    
+    return orderedMonths;
+  }, []);
   const containerRef = useRef<HTMLDivElement>(null)
   const clientRef = useRef<HTMLDivElement>(null)
   const developmentRef = useRef<HTMLDivElement>(null)
@@ -48,9 +60,6 @@ export default function Home() {
           gridGap={6}
           color="#6B7280"
           maxOpacity={0.3}
-          flickerChance={0.1}
-          fadeEdges={true}
-          fadeAmount={0.15}
           height={2400}
           width={800}
         />
@@ -58,7 +67,7 @@ export default function Home() {
       <div className="max-w-4xl mx-0 md:mx-auto md:ml-16 px-4 py-10 md:py-20">
 
         {/* Header Section */}
-        <div className="mb-12">
+        <div className="mb-0">
           <div className="text-gray-400 mb-2">Hey, It's me 👋</div>
           <h1 className="text-4xl font-bold tracking-wider text-white mb-6 font-['Courier_New']">
             ALI HASAN
@@ -80,7 +89,7 @@ export default function Home() {
           <div className="mt-8 flex space-x-4">
             <Link href="mailto:alihasank86@gmail.com" className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 transition-colors">
               <FiBriefcase className="mr-2" />
-              <span className="pt-1.5">Available for Hire</span>
+              <span className="pt-1">Hire Me</span>
             </Link>
           </div>
         </div>
@@ -135,8 +144,23 @@ export default function Home() {
             pathOpacity={0}
             gradientStartColor="#9ca3af"  // Grey color
             gradientStopColor="#9ca3af"   // White color
-            duration={12}  // Slower animation
+            duration={8}  // Slower animation
             reverse={false}  // Will automatically reverse due to animation settings
+          />
+          <AnimatedBeam
+            containerRef={containerRef}
+            fromRef={clientRef}
+            toRef={developmentRef}
+            startYOffset={0}
+            endYOffset={0}
+            curvature={0}  // No curvature to follow the dotted line
+            pathColor="transparent"  // Make base path invisible
+            pathWidth={2}
+            pathOpacity={0}
+            gradientStartColor="#9ca3af"  // Grey color
+            gradientStopColor="#9ca3af"   // White color
+            duration={8}  // Slower animation
+            reverse={true}  // Will automatically reverse due to animation settings
           />
         </div>
 
@@ -149,20 +173,27 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-52 gap-1">
-            {contributionData.map((level, i) => (
-              <div
-                key={i}
-                className={`w-3 h-3 rounded-sm ${level === 0 ? 'bg-gray-900' :
-                  level === 1 ? 'bg-gray-700' :
-                    level === 2 ? 'bg-gray-500' :
-                      level === 3 ? 'bg-gray-400' : 'bg-gray-200'
-                  }`}
-              ></div>
+            {Array.from({ length: 7 }).map((_, dayOfWeek) => (
+              // For each day of week (0-6)
+              Array.from({ length: 52 }).map((_, week) => {
+                const index = week * 7 + dayOfWeek;
+                return (
+                  <div
+                    key={index}
+                    className={`w-3 h-3 rounded-sm ${
+                      contributionData[index] === 0 ? 'bg-gray-900' :
+                      contributionData[index] === 1 ? 'bg-gray-700' :
+                      contributionData[index] === 2 ? 'bg-gray-500' :
+                      contributionData[index] === 3 ? 'bg-gray-400' : 'bg-gray-200'
+                    }`}
+                  ></div>
+                );
+              })
             ))}
           </div>
 
           <div className="text-xs text-gray-500 mt-2">
-            Total {totalContributions} contributions in lifetime
+            Total {totalContributions} contributions in the last year
           </div>
         </div>
 
@@ -170,57 +201,69 @@ export default function Home() {
         <div className="mb-8 md:mb-16">
           <div className="relative">
             {/* Horizontal Line with Dots - Responsive */}
-            <div className="flex items-center z-10 justify-between mb-4 md:mb-6 overflow-x-auto pb-2 md:pb-0 px-1 md:px-0">
-              <div className="w-3 h-3 ml-2 md:ml-4 z-10 bg-white rounded-full flex-shrink-0"></div>
-              <div className="w-3 h-3 ml-4 md:ml-8 z-10 bg-gray-500 rounded-full flex-shrink-0"></div>
-              <div className="w-3 h-3 ml-4 md:ml-8 z-10 bg-gray-700 rounded-full flex-shrink-0"></div>
-              <div className="text-gray-500 text-xs flex items-center flex-shrink-0 ml-2 md:ml-0">
+            <div className="hidden md:flex items-center z-10 justify-between mb-6 px-0">
+              <div className="w-3 h-3 ml-4 z-10 bg-white rounded-full flex-shrink-0"></div>
+              <div className="w-3 h-3 ml-8 z-10 bg-gray-500 rounded-full flex-shrink-0"></div>
+              <div className="w-3 h-3 ml-8 z-10 bg-gray-700 rounded-full flex-shrink-0"></div>
+              <div className="text-gray-500 text-xs flex items-center flex-shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </div>
             </div>
 
-            {/* Absolute line connecting dots with gradient */}
-            <div className="absolute top-1.5 left-2 md:left-4 right-8 h-0.5" style={{
+            {/* Vertical Line with Dots for Mobile */}
+            <div className="md:hidden absolute left-[21px] top-4 bottom-0 w-0.5" style={{
+              background: 'linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(75,85,99,1) 15%, rgba(31,41,55,1) 100%)'
+            }}></div>
+
+            {/* Horizontal line (desktop only) */}
+            <div className="hidden md:block absolute top-1.5 left-4 right-8 h-0.5" style={{
               top: '0.375rem',
               background: 'linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(75,85,99,1) 15%, rgba(31,41,55,1) 100%)'
             }}></div>
 
             {/* Timeline Items - Responsive Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-2 mt-2 md:mt-0">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-2 mt-0">
               {/* Item 1 - Current */}
-              <div className="flex flex-row sm:flex-col items-center sm:items-start">
-                <div className="w-10 h-10 bg-gray-900 rounded-md flex items-center justify-center mr-4 sm:mr-0 sm:mb-3 flex-shrink-0">
-                  <FiBriefcase className="text-gray-400" />
-                </div>
-                <div>
-                  <div className="text-white font-semibold">Freelance</div>
-                  <div className="text-gray-500 text-sm">2025 - Now</div>
+              <div className="flex items-start relative">
+                <div className="md:hidden w-3 h-3 absolute left-4 top-4 bg-white rounded-full z-10"></div>
+                <div className="flex flex-row md:flex-col items-center md:items-start pl-16 md:pl-0">
+                  <div className="w-10 h-10 bg-gray-900 rounded-md flex items-center justify-center mr-4 md:mr-0 md:mb-3 flex-shrink-0">
+                    <FiBriefcase className="text-gray-400" />
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold">Freelance</div>
+                    <div className="text-gray-500 text-sm">2025 - Now</div>
+                  </div>
                 </div>
               </div>
 
               {/* Item 2 */}
-              <div className="flex flex-row sm:flex-col items-center sm:items-start">
-                <div className="w-10 h-10 bg-gray-900 rounded-md flex items-center justify-center mr-4 sm:mr-0 sm:mb-3 flex-shrink-0">
-                  <FiCode className="text-gray-400" />
-                </div>
-                <div>
-                  <div className="text-white font-semibold">Fullstacktics</div>
-                  <div className="text-gray-500 text-sm">2025 - 2025</div>
+              <div className="flex items-start relative">
+                <div className="md:hidden w-3 h-3 absolute left-4 top-4 bg-gray-500 rounded-full z-10"></div>
+                <div className="flex flex-row md:flex-col items-center md:items-start pl-16 md:pl-0">
+                  <div className="w-10 h-10 bg-gray-900 rounded-md flex items-center justify-center mr-4 md:mr-0 md:mb-3 flex-shrink-0">
+                    <FiCode className="text-gray-400" />
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold">Fullstacktics</div>
+                    <div className="text-gray-500 text-sm">2025 - 2025</div>
+                  </div>
                 </div>
               </div>
 
-              {/* Item 4 */}
-              <div className="flex flex-row sm:flex-col items-center sm:items-start">
-                <div className="w-10 h-10 bg-gray-900 rounded-md flex items-center justify-center mr-4 sm:mr-0 sm:mb-3 flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-                  </svg>
-                </div>
-                <div>
-                  <div className="text-white font-semibold">Graduation</div>
-                  <div className="text-gray-500 text-sm">2022 - 2026</div>
+              {/* Item 3 */}
+              <div className="flex items-start relative">
+                <div className="md:hidden w-3 h-3 absolute left-4 top-4 bg-gray-700 rounded-full z-10"></div>
+                <div className="flex flex-row md:flex-col items-center md:items-start pl-16 md:pl-0">
+                  <div className="w-10 h-10 bg-gray-900 rounded-md flex items-center justify-center mr-4 md:mr-0 md:mb-3 flex-shrink-0">
+                    <FiCode className="text-gray-400" />
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold">Graduation</div>
+                    <div className="text-gray-500 text-sm">2022 - 2026</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -359,7 +402,7 @@ export default function Home() {
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
                 <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
               </svg>
-              <span className="pl-1 pt-1.5">Twitter</span>
+              <span className="pl-1 pt-1">Twitter</span>
             </Link>
 
             <Link href="https://github.com/Ali-Hasan-Khan"
@@ -368,7 +411,7 @@ export default function Home() {
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
               </svg>
-              <span className="pl-1 pt-1.5">Github</span>
+              <span className="pl-1 pt-1">Github</span>
             </Link>
 
 
@@ -385,7 +428,7 @@ export default function Home() {
                 <line x1="16" y1="17" x2="8" y2="17"></line>
                 <polyline points="10 9 9 9 8 9"></polyline>
               </svg>
-              <span className="pl-1 pt-1.5">Resume</span>
+              <span className="pl-1 pt-1">Resume</span>
             </Link>
 
             <Link
@@ -397,7 +440,7 @@ export default function Home() {
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path>
               </svg>
-              <span className="pl-1 pt-1.5">Discord</span>
+              <span className="pl-1 pt-1">Discord</span>
             </Link>
 
             <Link
@@ -408,7 +451,7 @@ export default function Home() {
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
                 <path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.968.193 1.798.919 2.286 1.61.516 3.275 1.009 4.654 1.472.846 1.467 1.618 2.92 2.286 4.368.613 1.323 1.468 2.068 2.285 2.286.652.177 1.323-.12 1.884-.648.282-.262 1.476-1.46 2.286-2.286.937-.932 2.1-2.137 3.636-3.635l5.478-5.478a2.226 2.226 0 0 0 .633-1.62c-.054-1.052-.95-1.918-1.666-2.09z"></path>
               </svg>
-              <span className="pl-1 pt-1.5">Telegram</span>
+              <span className="pl-1 pt-1">Telegram</span>
             </Link>
 
             <Link
@@ -422,7 +465,7 @@ export default function Home() {
                 <line x1="9" y1="9" x2="9.01" y2="9"></line>
                 <line x1="15" y1="9" x2="15.01" y2="9"></line>
               </svg>
-              <span className="pl-1 pt-1.5">Peerlist</span>
+              <span className="pl-1 pt-1">Peerlist</span>
             </Link>
           </div>
         </div>
