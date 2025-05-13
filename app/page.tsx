@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { FiGithub, FiLinkedin, FiMail, FiExternalLink, FiCode, FiBriefcase } from 'react-icons/fi'
+import { FiGithub, FiLinkedin, FiMail, FiExternalLink, FiCode, FiBriefcase, FiStar } from 'react-icons/fi'
 import { AnimatedBeam } from "@/components/magicui/animated-beam"
 import { FlickeringGrid } from "@/components/magicui/flickering-grid"
 
@@ -55,22 +55,21 @@ export default function Home() {
     <div className="min-h-screen bg-black text-gray-300 flex justify-center font-mono">
       <div className="relative w-[362px] overflow-hidden rounded-lg border bg-gray-900/60 border-black">
         <FlickeringGrid
-          className="absolute inset-0 z-0 size-full"
+          className="absolute inset-0 z-0 size-full h-[7200px] sm:h-[6500px] md:h-[3500px]"
           squareSize={4}
           gridGap={6}
           color="#6B7280"
           maxOpacity={0.3}
-          height={2800}
           width={800}
         />
       </div>
       <div className="max-w-4xl mx-0 md:mx-auto md:ml-16 px-4 py-10 md:py-20">
 
         {/* Header Section */}
-        <div className="mb-0">
+        <div className="mt-10 sm:mt-20 md:mt-0 md:mb-0">
           <div className="text-gray-400 mb-2">Hey, It's me 👋</div>
           <h1 className="text-4xl font-bold tracking-wider text-white mb-6 font-['Courier_New']">
-            ALI HASAN
+            ALI HASAN KHAN
           </h1>
 
           <div className=" mb-2">
@@ -87,7 +86,13 @@ export default function Home() {
           </div>
 
           <div className="mt-8 flex space-x-4">
-            <Link href="mailto:alihasank86@gmail.com" className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 transition-colors">
+            <Link 
+              href="mailto:alihasank86@gmail.com" 
+              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center
+                hover:bg-gray-900 hover:scale-105 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-500
+                active:scale-95 active:translate-y-0.5
+                transition-all duration-200 ease-in-out"
+            >
               <FiBriefcase className="mr-2" />
               <span className="pt-1">Hire Me</span>
             </Link>
@@ -104,7 +109,7 @@ export default function Home() {
           {/* Client */}
           <div className="relative z-10" ref={clientRef}>
             <button
-              className={`px-4 py-1.5 text-sm rounded-md border border-gray-700 bg-black text-white transition-colors duration-300`}
+              className={`md:px-4 px-2 md:py-1.5 py-1 text-sm rounded-md border border-gray-700 bg-black text-white transition-colors duration-300`}
             >
               Client
             </button>
@@ -112,7 +117,7 @@ export default function Home() {
 
           {/* Processing */}
           <div className="relative z-10 flex flex-col items-center space-y-1 pt-4">
-            <div className="w-10 h-10 rounded-md border border-gray-700 bg-black flex items-center justify-center">
+            <div className="md:w-10 md:h-10 w-8 h-8 rounded-md border border-gray-700 bg-black flex items-center justify-center">
               <motion.div
                 className="w-4 h-4 border-2 border-dashed border-gray-400 rounded-full"
                 animate={{ rotate: 360 }}
@@ -125,7 +130,7 @@ export default function Home() {
           {/* Development */}
           <div className="relative z-10" ref={developmentRef}>
             <button
-              className={`px-4 py-1.5 text-sm rounded-md border border-gray-700 bg-black text-white transition-colors duration-300`}
+              className={`md:px-4 px-2 md:py-1.5 py-1 text-sm rounded-md border border-gray-700 bg-black text-white transition-colors duration-300`}
             >
               Development
             </button>
@@ -180,11 +185,11 @@ export default function Home() {
                 return (
                   <div
                     key={index}
-                    className={`w-3 h-3 rounded-sm ${contributionData[index] === 0 ? 'bg-gray-900' :
+                    className={`md:w-3 md:h-3 w-1.5 h-1.5 rounded-sm ${contributionData[index] === 0 ? 'bg-gray-900' :
                       contributionData[index] === 1 ? 'bg-gray-700' :
-                        contributionData[index] === 2 ? 'bg-gray-500' :
-                          contributionData[index] === 3 ? 'bg-gray-400' : 'bg-gray-200'
-                      }`}
+                      contributionData[index] === 2 ? 'bg-gray-500' :
+                      contributionData[index] === 3 ? 'bg-gray-400' : 'bg-gray-200'
+                    }`}
                   ></div>
                 );
               })
@@ -212,13 +217,16 @@ export default function Home() {
             </div>
 
             {/* Vertical Line with Dots for Mobile */}
-            <div className="md:hidden absolute left-[21px] top-4 bottom-0 w-0.5" style={{
-              background: 'linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(75,85,99,1) 15%, rgba(31,41,55,1) 100%)'
+            <div className="md:hidden absolute left-[21px] top-4 bottom-0" style={{
+              width: '2px',
+              background: 'linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(75,85,99,1) 15%, rgba(31,41,55,1) 100%)',
+              clipPath: 'polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)'
             }}></div>
 
             {/* Horizontal line (desktop only) */}
             <div className="hidden md:block absolute top-1.5 left-4 right-8 h-0.5" style={{
               top: '0.375rem',
+              clipPath: 'polygon(0 0, 100% 0, 85% 100%, 0 100%)',
               background: 'linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(75,85,99,1) 15%, rgba(31,41,55,1) 100%)'
             }}></div>
 
@@ -342,8 +350,12 @@ export default function Home() {
           <h2 className="text-2xl font-bold mb-6 text-white">Projects</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Project 1 - Pastel */}
             <div className="border border-gray-800 shadow-md shadow-slate-600 rounded-md p-6 bg-black/30 hover:bg-gray-900/30 transition-colors">
-              <h3 className="text-xl font-semibold text-white mb-3">Pastel</h3>
+              <div className="flex items-center gap-3 mb-3">
+                <img src="/pastel-logo.ico" alt="Pastel Logo" className="w-8 h-8 rounded-md" />
+                <h3 className="text-xl font-semibold text-white">Pastel</h3>
+              </div>
               <p className="text-gray-400 mb-4">
                 A personal memory vault that lets users write letters to their future selves,
                 capture special moments, and receive AI-generated summaries of their emotional journey.
@@ -369,9 +381,12 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Project 1 - Edumanager */}
+            {/* Project 2 - Edumanager */}
             <div className="border border-gray-800 shadow-md shadow-slate-600 rounded-md p-6 bg-black/30 hover:bg-gray-900/30 transition-colors">
-              <h3 className="text-xl font-semibold text-white mb-3">Edumanager</h3>
+              <div className="flex items-center gap-3 mb-3">
+                <img src="/edumanager-logo.svg" alt="Edumanager Logo" className="w-8 h-8 rounded-md" />
+                <h3 className="text-xl font-semibold text-white">Edumanager</h3>
+              </div>
               <p className="text-gray-400 mb-4">
                 A comprehensive school management system built with Next.js,
                 featuring student tracking, attendance management, and grade
@@ -398,9 +413,44 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Project 2 - Go-Bankify */}
+            {/* Project 3 - Whoscored Data Scraper */}
             <div className="border border-gray-800 shadow-md shadow-slate-600 rounded-md p-6 bg-black/30 hover:bg-gray-900/30 transition-colors">
-              <h3 className="text-xl font-semibold text-white mb-3">Go-Bankify</h3>
+              <div className="flex items-center gap-3 mb-3">
+                <img src="/whoscored-logo.jpg" alt="Whoscored Logo" className="w-8 h-8 rounded-md" />
+                <h3 className="text-xl font-semibold text-white">Whoscored Data Scraper</h3>
+                <span className="px-2 py-0.5 text-xs rounded-full bg-yellow-900/60 text-yellow-400 flex items-center gap-1"><FiStar />30+</span>
+              </div>
+              <p className="text-gray-400 mb-4">
+                A sophisticated web scraping tool that extracts and visualizes football
+                match data from Whoscored.com using Selenium and mplsoccer library.
+              </p>
+
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400">Python</span>
+                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400">Selenium</span>
+                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400">Pandas</span>
+                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400">Matplotlib</span>
+                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400">BeautifulSoup</span>
+              </div>
+
+              <div className="flex space-x-4">
+                <Link href="https://github.com/Ali-Hasan-Khan/whoscored-data-scraper" target="_blank" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                  <FiGithub />
+                  <span className="text-sm">Code</span>
+                </Link>
+                <Link href="https://github.com/Ali-Hasan-Khan/whoscored-data-scraper" target="_blank" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                  <FiExternalLink />
+                  <span className="text-sm">Demo</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Project 4 - Go-Bankify */}
+            <div className="border border-gray-800 shadow-md shadow-slate-600 rounded-md p-6 bg-black/30 hover:bg-gray-900/30 transition-colors">
+              <div className="flex items-center gap-3 mb-3">
+                <img src="/go-bankify-logo.png" alt="Go-Bankify Logo" className="w-8 h-8 rounded-md" />
+                <h3 className="text-xl font-semibold text-white">Go-Bankify</h3>
+              </div>
               <p className="text-gray-400 mb-4">
                 A robust banking service system built in Go, enabling account creation,
                 balance management, and currency handling with secure transaction
@@ -427,9 +477,12 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Project 3 - Dialogue Summarizer */}
+            {/* Project 5 - Dialogue Summarizer */}
             <div className="border border-gray-800 shadow-md shadow-slate-600 rounded-md p-6 bg-black/30 hover:bg-gray-900/30 transition-colors">
-              <h3 className="text-xl font-semibold text-white mb-3">Dialogue Summarizer</h3>
+              <div className="flex items-center gap-3 mb-3">
+                <img src="/dialogue-logo.png" alt="Dialogue Summarizer Logo" className="w-8 h-8 rounded-md" />
+                <h3 className="text-xl font-semibold text-white">Dialogue Summarizer</h3>
+              </div>
               <p className="text-gray-400 mb-4">
                 An ML-powered dialogue summarization tool using the SAMSum
                 Corpus dataset. Transforms complex conversations into concise,
@@ -455,34 +508,6 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-
-            {/* Project 4 - Whoscored Data Scraper */}
-            <div className="border border-gray-800 shadow-md shadow-slate-600 rounded-md p-6 bg-black/30 hover:bg-gray-900/30 transition-colors">
-              <h3 className="text-xl font-semibold text-white mb-3">Whoscored Data Scraper</h3>
-              <p className="text-gray-400 mb-4">
-                A sophisticated web scraping tool that extracts and visualizes football
-                match data from Whoscored.com using Selenium and mplsoccer library.
-              </p>
-
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400">Python</span>
-                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400  ">Selenium</span>
-                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400">Pandas</span>
-                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400">mplsoccer</span>
-                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400">BeautifulSoup</span>
-              </div>
-
-              <div className="flex space-x-4">
-                <Link href="https://github.com/Ali-Hasan-Khan/Scrape-Whoscored-Event-Data" target="_blank" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
-                  <FiGithub />
-                  <span className="text-sm">Code</span>
-                </Link>
-                <Link href="https://github.com/Ali-Hasan-Khan/Scrape-Whoscored-Event-Data" target="_blank" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
-                  <FiExternalLink />
-                  <span className="text-sm">Demo</span>
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -492,7 +517,7 @@ export default function Home() {
           <div className="flex flex-wrap gap-2">
             <Link href="https://x.com/rockingAli5"
               target="_blank"
-              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 transition-colors">
+              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 hover:scale-105 hover:-translate-y-0.5 transition-all duration-200">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
                 <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
               </svg>
@@ -501,19 +526,17 @@ export default function Home() {
 
             <Link href="https://github.com/Ali-Hasan-Khan"
               target="_blank"
-              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 transition-colors">
+              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 hover:scale-105 hover:-translate-y-0.5 transition-all duration-200">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
               </svg>
               <span className="pl-1 pt-1">Github</span>
             </Link>
 
-
-
             <Link
               href="https://drive.google.com/file/d/1HrVtTOBTWZl7OxY_2JUUtD4iYOcnTYqG/view"
               target="_blank"
-              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 transition-colors"
+              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 hover:scale-105 hover:-translate-y-0.5 transition-all duration-200"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -528,7 +551,7 @@ export default function Home() {
             <Link
               href="https://discordapp.com/users/alihasankhan88086835"
               target="_blank"
-              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 transition-colors"
+              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 hover:scale-105 hover:-translate-y-0.5 transition-all duration-200"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
                 <circle cx="12" cy="12" r="10"></circle>
@@ -540,7 +563,7 @@ export default function Home() {
             <Link
               href="https://t.me/rockingAli"
               target="_blank"
-              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 transition-colors"
+              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 hover:scale-105 hover:-translate-y-0.5 transition-all duration-200"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
                 <path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.968.193 1.798.919 2.286 1.61.516 3.275 1.009 4.654 1.472.846 1.467 1.618 2.92 2.286 4.368.613 1.323 1.468 2.068 2.285 2.286.652.177 1.323-.12 1.884-.648.282-.262 1.476-1.46 2.286-2.286.937-.932 2.1-2.137 3.636-3.635l5.478-5.478a2.226 2.226 0 0 0 .633-1.62c-.054-1.052-.95-1.918-1.666-2.09z"></path>
@@ -551,7 +574,7 @@ export default function Home() {
             <Link
               href="https://peerlist.io/alihasank86"
               target="_blank"
-              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 transition-colors"
+              className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 hover:scale-105 hover:-translate-y-0.5 transition-all duration-200"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
                 <circle cx="12" cy="12" r="10"></circle>

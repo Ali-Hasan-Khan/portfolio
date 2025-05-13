@@ -19,8 +19,10 @@ export default function Nav() {
       <div className="max-w-4xl mx-auto px-4">
         <div className="flex justify-between h-16 md:ml-[82px]">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-mono tracking-wider text-white">
-              ALI HASAN
+            <Link href="/" className="flex items-center">
+              <span className="text-xl font-mono tracking-wider text-white">
+                ALI HASAN KHAN
+              </span>
             </Link>
             <Link href="https://x.com/rockingAli5" className="text-gray-500 ml-2 text-sm">/ @rockingAli5</Link>
           </div>
