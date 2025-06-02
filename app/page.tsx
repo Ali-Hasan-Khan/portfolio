@@ -72,17 +72,8 @@ export default function Home() {
             ALI HASAN KHAN
           </h1>
 
-          <div className=" mb-2">
-            I'm a <span className="text-white font-semibold">Web Developer</span> who turns caffeine into code.
-            Not satisfied with just frontend magic, I ventured into the backend realm to become a true
-            <span className="text-white font-semibold"> Full Stack Architect</span>. When I'm not building for clients, you'll find me
-            <span className="text-white font-semibold"> Freelancing</span> in the digital wilderness, crafting solutions one commit at a time.
-          </div>
-
-          <div className="mt-6">
-            Balancing the logic of <span className="text-white font-semibold">Development</span> with the artistry of <span className="text-white font-semibold">Design </span>
-            is my superpower. I don't just build websites, I create digital experiences that live at the intersection of function and beauty.
-            My GitHub contribution graph is my garden, and I'm always planting new seeds of innovation.
+          <div className="mb-2">
+            I'm a <span className="text-white font-semibold">Full Stack Web Developer</span> with a strong focus on both frontend and backend development. I build functional, user-friendly digital experiences that balance design and engineering. Whether working with clients or <span className="text-white font-semibold">freelancing</span>, I'm always exploring new ways to create and innovate.
           </div>
 
           <div className="mt-8 flex space-x-4">
@@ -240,8 +231,8 @@ export default function Home() {
                     <FiBriefcase className="text-gray-400" />
                   </div>
                   <div>
-                    <div className="text-white font-semibold">Freelance</div>
-                    <div className="text-gray-500 text-sm">2025 - Now</div>
+                    <div className="text-white font-semibold">Graduation</div>
+                    <div className="text-gray-500 text-sm">June 2022 - July 2026</div>
                   </div>
                 </div>
               </div>
@@ -255,7 +246,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="text-white font-semibold">Fullstacktics</div>
-                    <div className="text-gray-500 text-sm">2025 - 2025</div>
+                    <div className="text-gray-500 text-sm">March 2025 - April 2025</div>
                   </div>
                 </div>
               </div>
@@ -268,8 +259,8 @@ export default function Home() {
                     <FiCode className="text-gray-400" />
                   </div>
                   <div>
-                    <div className="text-white font-semibold">Graduation</div>
-                    <div className="text-gray-500 text-sm">2022 - 2026</div>
+                    <div className="text-white font-semibold">Freelance</div>
+                    <div className="text-gray-500 text-sm">May 2025 - Now</div>
                   </div>
                 </div>
               </div>
