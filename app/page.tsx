@@ -374,7 +374,7 @@ export default function Home() {
                   <FiGithub />
                   <span className="text-sm">Code</span>
                 </Link>
-                <Link href="https://pastel-seven.vercel.app" target="_blank" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                <Link href="https://pastel.alihk.me" target="_blank" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
                   <FiExternalLink />
                   <span className="text-sm">Demo</span>
                 </Link>
@@ -406,7 +406,7 @@ export default function Home() {
                   <FiGithub />
                   <span className="text-sm">Code</span>
                 </Link>
-                <Link href="https://edu-manager-sms.vercel.app/" target="_blank" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                <Link href="https://edumanager.alihk.me" target="_blank" className="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
                   <FiExternalLink />
                   <span className="text-sm">Demo</span>
                 </Link>
