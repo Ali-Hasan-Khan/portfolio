@@ -363,7 +363,7 @@ export default function Home() {
               <div className="flex items-center gap-3 mb-3">
                 <img src="/pastel-logo.ico" alt="Pastel Logo" className="w-8 h-8 rounded-md" />
                 <h3 className="text-xl font-semibold text-white">Pastel</h3>
-                <span className="px-2 py-0.5 text-xs rounded-full bg-yellow-900/60 text-yellow-400 flex items-center gap-1">WIP</span>
+                {/* <span className="px-2 py-0.5 text-xs rounded-full bg-yellow-900/60 text-yellow-400 flex items-center gap-1">WIP</span> */}
               </div>
               <p className="text-gray-400 mb-4">
                 A personal memory vault that lets users write letters to their future selves,
