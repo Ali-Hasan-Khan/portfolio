@@ -543,7 +543,7 @@ export default function Home() {
             </Link>
 
             <Link
-              href="https://drive.google.com/file/d/1HrVtTOBTWZl7OxY_2JUUtD4iYOcnTYqG/view"
+              href="https://drive.google.com/file/d/1GZVJWHFu3qg-fEiOYvWSKVPjsQPmMuP2/view?usp=drive_link"
               target="_blank"
               className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 hover:scale-105 hover:-translate-y-0.5 transition-all duration-200"
             >
@@ -608,7 +608,7 @@ export default function Home() {
             <Link href="https://github.com/Ali-Hasan-Khan" className="text-gray-500 hover:text-white transition-colors">
               <FiGithub />
             </Link>
-            <Link href="https://www.linkedin.com/in/ali-hasan-khan" className="text-gray-500 hover:text-white transition-colors">
+            <Link href="https://www.linkedin.com/in/ali-hasan-khan-56808b123/" className="text-gray-500 hover:text-white transition-colors">
               <FiLinkedin />
             </Link>
             <Link href="mailto:alihasank86@gmail.com" className="text-gray-500 hover:text-white transition-colors">
