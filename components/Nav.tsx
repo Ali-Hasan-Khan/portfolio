@@ -8,7 +8,7 @@ const links = [
   { name: "About", href: "/" },
   { name: "Projects", href: "https://github.com/Ali-Hasan-Khan" },
   { name: "Contact", href: "mailto:alihasank86@gmail.com" },
-  { name: "Resume", href: "https://drive.google.com/file/d/1HrVtTOBTWZl7OxY_2JUUtD4iYOcnTYqG/view?usp=sharing" }
+  { name: "Resume", href: "https://drive.google.com/file/d/1GZVJWHFu3qg-fEiOYvWSKVPjsQPmMuP2/view?usp=drive_link" }
 ];
 
 export default function Nav() {
