@@ -30,7 +30,7 @@ export default function Nav() {
             <Link href="https://github.com/Ali-Hasan-Khan" className="text-gray-500 hover:text-white transition-colors">
               <FiGithub size={18} />
             </Link>
-            <Link href="https://www.linkedin.com/in/ali-hasan-khan" className="text-gray-500 hover:text-white transition-colors">
+            <Link href="https://www.linkedin.com/in/ali-hasan-khan-56808b123/" className="text-gray-500 hover:text-white transition-colors">
               <FiLinkedin size={18} />
             </Link>
             <Link href="mailto:alihasank86@gmail.com" className="text-gray-500 hover:text-white transition-colors">
