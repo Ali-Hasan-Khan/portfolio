@@ -777,7 +777,7 @@ export default function Home() {
                   <span className="text-sm">Code</span>
                 </Link>
                 <Link
-                  href="https://pastel.alihk.me"
+                  href="https://pastel.alihk.tech"
                   target="_blank"
                   className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
                 >
@@ -831,7 +831,7 @@ export default function Home() {
                   <span className="text-sm">Code</span>
                 </Link>
                 <Link
-                  href="https://edumanager.alihk.me"
+                  href="https://edumanager.alihk.tech"
                   target="_blank"
                   className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
                 >
