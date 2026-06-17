@@ -56,7 +56,7 @@ export default function Home() {
         // Replace 'Ali-Hasan-Khan' with your actual GitHub username
         const username = "Ali-Hasan-Khan";
         const response = await fetch(
-          `/api/github-contributions?username=${username}`
+          `/api/github-contributions?username=${username}`,
         );
         const data = await response.json();
 
@@ -68,7 +68,7 @@ export default function Home() {
         console.error("Error fetching GitHub contributions:", error);
         // Fallback to random data if fetch fails
         setContributionData(
-          Array.from({ length: 52 * 7 }, () => Math.floor(Math.random() * 5))
+          Array.from({ length: 52 * 7 }, () => Math.floor(Math.random() * 5)),
         );
         setTotalContributions(2019);
       }
@@ -230,18 +230,18 @@ export default function Home() {
                       contributionData.length === 0
                         ? "bg-gray-900"
                         : contributionData[index] === 0
-                        ? "bg-gray-900"
-                        : contributionData[index] === 1
-                        ? "bg-gray-700"
-                        : contributionData[index] === 2
-                        ? "bg-gray-500"
-                        : contributionData[index] === 3
-                        ? "bg-gray-400"
-                        : "bg-gray-200"
+                          ? "bg-gray-900"
+                          : contributionData[index] === 1
+                            ? "bg-gray-700"
+                            : contributionData[index] === 2
+                              ? "bg-gray-500"
+                              : contributionData[index] === 3
+                                ? "bg-gray-400"
+                                : "bg-gray-200"
                     }`}
                   ></div>
                 );
-              })
+              }),
             )}
           </div>
 
@@ -732,6 +732,57 @@ export default function Home() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Project 0 - Dsend */}
+            <div className="border border-gray-800 shadow-md shadow-slate-600 rounded-md p-6 bg-black/30 hover:bg-gray-900/30 transition-colors">
+              <div className="flex items-center gap-3 mb-3">
+                <img
+                  src="/go-bankify-logo.png"
+                  alt="Dsend logo"
+                  className="w-8 h-8 rounded-md"
+                />
+                <h3 className="text-xl font-semibold text-white">Dsend</h3>
+                <span className="px-2 py-0.5 text-xs rounded-full bg-yellow-900/60 text-yellow-400 flex items-center gap-1">
+                  WIP
+                </span>
+              </div>
+              <p className="text-gray-400 mb-4">
+                A message broker built in Go with support for concurrent
+                producers/consumers, at-least-once delivery, ack-based
+                processing, retries, redelivery, and dead-letter queues.
+              </p>
+
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400">
+                  Go
+                </span>
+                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400">
+                  Concurrency
+                </span>
+                <span className="px-3 py-1 text-xs rounded-full bg-gray-900/60 text-gray-400">
+                  Distributed Systems
+                </span>
+              </div>
+
+              <div className="flex space-x-4">
+                <Link
+                  href="https://github.com/Ali-Hasan-Khan/dsend"
+                  target="_blank"
+                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <FiGithub />
+                  <span className="text-sm">Code</span>
+                </Link>
+                <Link
+                  href="https://github.com/Ali-Hasan-Khan/dsend"
+                  target="_blank"
+                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <FiExternalLink />
+                  <span className="text-sm">Demo</span>
+                </Link>
+              </div>
+            </div>
+
             {/* Project 1 - Pastel */}
             <div className="border border-gray-800 shadow-md shadow-slate-600 rounded-md p-6 bg-black/30 hover:bg-gray-900/30 transition-colors">
               <div className="flex items-center gap-3 mb-3">
