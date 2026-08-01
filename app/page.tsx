@@ -773,12 +773,12 @@ export default function Home() {
                   <span className="text-sm">Code</span>
                 </Link>
                 <Link
-                  href="https://github.com/Ali-Hasan-Khan/dsend"
+                  href="https://dsend.alihk.tech"
                   target="_blank"
                   className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
                 >
                   <FiExternalLink />
-                  <span className="text-sm">Demo</span>
+                  <span className="text-sm">Docs</span>
                 </Link>
               </div>
             </div>
@@ -1115,7 +1115,7 @@ export default function Home() {
             </Link>
 
             <Link
-              href="https://drive.google.com/file/d/1GZVJWHFu3qg-fEiOYvWSKVPjsQPmMuP2/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1DeG9s6XRnJo1IKhNX-fNhkDEG2PonYin/view?usp=drivesdk"
               target="_blank"
               className="bg-black border border-gray-700 rounded-md px-2 shadow-md shadow-slate-600 py-1 flex items-center hover:bg-gray-900 hover:scale-105 hover:-translate-y-0.5 transition-all duration-200"
             >
