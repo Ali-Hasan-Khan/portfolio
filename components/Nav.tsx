@@ -1,14 +1,16 @@
-'use client'
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FiMenu, FiX, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
-import Link from 'next/link';
+"use client";
+import { useState } from "react";
+import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import Link from "next/link";
 
 const links = [
   { name: "About", href: "/" },
   { name: "Projects", href: "https://github.com/Ali-Hasan-Khan" },
   { name: "Contact", href: "mailto:alihasank86@gmail.com" },
-  { name: "Resume", href: "https://drive.google.com/file/d/1GZVJWHFu3qg-fEiOYvWSKVPjsQPmMuP2/view?usp=drive_link" }
+  {
+    name: "Resume",
+    href: "https://drive.google.com/file/d/1DeG9s6XRnJo1IKhNX-fNhkDEG2PonYin/view?usp=drivesdk",
+  },
 ];
 
 export default function Nav() {
@@ -24,16 +26,30 @@ export default function Nav() {
                 ALI HASAN KHAN
               </span>
             </Link>
-            <Link href="https://x.com/rockingAli5" className="text-gray-500 ml-2 text-sm">/ @rockingAli5</Link>
+            <Link
+              href="https://x.com/rockingAli5"
+              className="text-gray-500 ml-2 text-sm"
+            >
+              / @rockingAli5
+            </Link>
           </div>
           <div className="flex items-center space-x-4">
-            <Link href="https://github.com/Ali-Hasan-Khan" className="text-gray-500 hover:text-white transition-colors">
+            <Link
+              href="https://github.com/Ali-Hasan-Khan"
+              className="text-gray-500 hover:text-white transition-colors"
+            >
               <FiGithub size={18} />
             </Link>
-            <Link href="https://www.linkedin.com/in/ali-hasan-khan-56808b123/" className="text-gray-500 hover:text-white transition-colors">
+            <Link
+              href="https://www.linkedin.com/in/ali-hasan-khan-56808b123/"
+              className="text-gray-500 hover:text-white transition-colors"
+            >
               <FiLinkedin size={18} />
             </Link>
-            <Link href="mailto:alihasank86@gmail.com" className="text-gray-500 hover:text-white transition-colors">
+            <Link
+              href="mailto:alihasank86@gmail.com"
+              className="text-gray-500 hover:text-white transition-colors"
+            >
               <FiMail size={18} />
             </Link>
           </div>
@@ -41,4 +57,4 @@ export default function Nav() {
       </div>
     </nav>
   );
-} 
+}
