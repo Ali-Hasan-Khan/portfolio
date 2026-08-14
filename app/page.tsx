@@ -96,27 +96,28 @@ export default function Home() {
           {/* <h1 className="text-4xl font-bold tracking-wider text-white mb-6 font-['Courier_New']">
               ALI HASAN KHAN
             </h1> */}
-          <div style={{ position: "relative", height: "50px", width: "400px" }}>
+          <div className="group relative h-[50px] w-[400px]">
+            <div className="absolute -inset-3 rounded-lg bg-white/15 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             <TextPressure
               text="ALI HASAN KHAN"
               flex={true}
               alpha={false}
               stroke={false}
-              width={true}
+              width={false}
               weight={true}
-              italic={true}
+              italic={false}
               textColor="#ffffff"
               strokeColor="#ff0000"
               minFontSize={36}
               fontSizeMultiplier={0.5}
+              fontFamily="var(--font-space-grotesk)"
+              className="name-title"
             />
           </div>
 
           <div className="mb-2">
             I'm a{" "}
-            <span className="text-white font-semibold">
-              Full Stack Web Developer
-            </span>{" "}
+            <span className="text-white font-semibold">software engineer</span>{" "}
             with a strong focus on both frontend and backend web development. I
             build functional, user-friendly digital experiences that balance
             design and engineering. Whether working with clients or{" "}
@@ -360,7 +361,7 @@ export default function Home() {
                     <div className="text-white font-semibold">
                       Mercari India
                     </div>
-                    <div className="text-gray-500 text-sm">Jan 2026 - Now</div>
+                    <div className="text-gray-500 text-sm">Jan 2026 - July 2026</div>
                   </div>
                 </div>
               </div>
@@ -726,7 +727,7 @@ export default function Home() {
         </div>
 
         {/* Projects Section */}
-        <div className="mb-16">
+        <div className="mb-16" id="projects">
           <h2 className="text-2xl font-bold mb-6 text-white text-center md:text-start">
             Projects
           </h2>

@@ -5,7 +5,9 @@ import Link from "next/link";
 
 const links = [
   { name: "About", href: "/" },
-  { name: "Projects", href: "https://github.com/Ali-Hasan-Khan" },
+  { name: "Projects", href: "/#projects" },
+  { name: "Blog", href: "/blog" },
+  { name: "Books", href: "/books" },
   { name: "Contact", href: "mailto:alihasank86@gmail.com" },
   {
     name: "Resume",
@@ -32,6 +34,17 @@ export default function Nav() {
             >
               / @rockingAli5
             </Link>
+          </div>
+          <div className="hidden md:flex items-center space-x-6">
+            {links.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
           </div>
           <div className="flex items-center space-x-4">
             <Link

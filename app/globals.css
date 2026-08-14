@@ -15,6 +15,15 @@ html {
   scroll-behavior: smooth; /* Enables smooth scrolling */
 }
 
+/* ALI HASAN KHAN hero title hover effect */
+.name-title {
+  transition: filter 0.4s ease;
+  cursor: default;
+}
+.group:hover .name-title {
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.35));
+}
+
 /* Keep your custom styles below */
 /* Custom animations */
 @keyframes float {
