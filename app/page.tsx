@@ -93,10 +93,7 @@ export default function Home() {
         {/* Header Section */}
         <div className="mt-10 sm:mt-20 md:mt-0 md:mb-0">
           <div className="text-gray-400 mb-2">Hey, It's me 👋</div>
-          {/* <h1 className="text-4xl font-bold tracking-wider text-white mb-6 font-['Courier_New']">
-              ALI HASAN KHAN
-            </h1> */}
-          <div className="group relative h-[50px] w-[400px]">
+          <div className="group relative h-[50px] w-[280px] md:w-[400px]">
             <div className="absolute -inset-3 rounded-lg bg-white/15 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             <TextPressure
               text="ALI HASAN KHAN"
@@ -108,7 +105,7 @@ export default function Home() {
               italic={false}
               textColor="#ffffff"
               strokeColor="#ff0000"
-              minFontSize={36}
+              minFontSize={28}
               fontSizeMultiplier={0.5}
               fontFamily="var(--font-space-grotesk)"
               className="name-title"
@@ -118,7 +115,7 @@ export default function Home() {
           <div className="mb-2">
             I'm a{" "}
             <span className="text-white font-semibold">software engineer</span>{" "}
-            with a strong focus on both frontend and backend web development. I
+            with a strong focus on <span className="text-white font-semibold">backend</span> web development. I
             build functional, user-friendly digital experiences that balance
             design and engineering. Whether working with clients or{" "}
             <span className="text-white font-semibold">freelancing</span>, I'm
@@ -935,7 +932,7 @@ export default function Home() {
 
               <div className="flex space-x-4">
                 <Link
-                  href="https://github.com/Ali-Hasan-Khan/whoscored-data-scraper"
+                  href="https://github.com/Ali-Hasan-Khan/Scrape-Whoscored-Event-Data"
                   target="_blank"
                   className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
                 >
@@ -943,12 +940,12 @@ export default function Home() {
                   <span className="text-sm">Code</span>
                 </Link>
                 <Link
-                  href="https://github.com/Ali-Hasan-Khan/whoscored-data-scraper"
+                  href="https://whoscoredscraper.alihk.tech/"
                   target="_blank"
                   className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
                 >
                   <FiExternalLink />
-                  <span className="text-sm">Demo</span>
+                  <span className="text-sm">Docs</span>
                 </Link>
               </div>
             </div>

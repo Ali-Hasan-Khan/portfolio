@@ -1,6 +1,12 @@
 "use client";
 import { useState } from "react";
-import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import {
+  FiGithub,
+  FiLinkedin,
+  FiMail,
+  FiMenu,
+  FiX,
+} from "react-icons/fi";
 import Link from "next/link";
 
 const links = [
@@ -22,19 +28,7 @@ export default function Nav() {
     <nav className="fixed w-full z-50 bg-black/90 backdrop-blur-sm border-b border-gray-800">
       <div className="max-w-4xl mx-auto px-4">
         <div className="flex justify-between h-16 md:ml-[82px]">
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center">
-              <span className="text-xl font-mono tracking-wider text-white">
-                ALI HASAN KHAN
-              </span>
-            </Link>
-            <Link
-              href="https://x.com/rockingAli5"
-              className="text-gray-500 ml-2 text-sm"
-            >
-              / @rockingAli5
-            </Link>
-          </div>
+          {/* Desktop links */}
           <div className="hidden md:flex items-center space-x-6">
             {links.map((link) => (
               <Link
@@ -46,6 +40,8 @@ export default function Nav() {
               </Link>
             ))}
           </div>
+
+          {/* Right side: social icons + hamburger */}
           <div className="flex items-center space-x-4">
             <Link
               href="https://github.com/Ali-Hasan-Khan"
@@ -65,8 +61,30 @@ export default function Nav() {
             >
               <FiMail size={18} />
             </Link>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden text-gray-400 hover:text-white transition-colors"
+            >
+              {isOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile dropdown */}
+        {isOpen && (
+          <div className="md:hidden border-t border-gray-800 pb-4">
+            {links.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="block py-2 text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </nav>
   );
