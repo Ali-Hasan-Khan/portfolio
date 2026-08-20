@@ -1,0 +1,30 @@
+---
+title: "Go-Bankify"
+description: "A robust banking service system built in Go, enabling account creation, balance management, and currency handling with secure transaction processing."
+year: "2024"
+stack: ["Go", "PostgreSQL", "Docker", "REST API", "JWT"]
+status: "Shipped"
+github: "https://github.com/Ali-Hasan-Khan/go-bankify"
+---
+
+## The Problem
+
+Banking systems are the canonical example of software that must be correct. Account balances can't go negative (unless intended), transfers must be atomic, and concurrent access must not corrupt state. Building one from scratch forces you to take correctness seriously.
+
+## Architecture
+
+Go-Bankify is a REST API built with Go's `net/http` (or a lightweight router). PostgreSQL handles persistence with proper transaction isolation. JWT tokens manage authentication.
+
+The core operations are: create account, deposit, withdraw, transfer between accounts, and query balance. Each operation is wrapped in a database transaction.
+
+## Key Decisions
+
+**Database transactions for everything.** A transfer is two operations (debit + credit) that must succeed or fail together. PostgreSQL's transaction isolation levels handle this correctly.
+
+**Docker Compose** for development. PostgreSQL in a container means zero setup: `docker compose up` and you have a working database.
+
+**JWT auth** keeps the API stateless. Tokens carry user identity and expire after a configurable window. No session storage needed.
+
+## What I Learned
+
+The hardest problem was handling concurrent transfers. Two transfers from the same account can race each other. If both read the balance before either writes, you can overdraw. Pessimistic locking (SELECT FOR UPDATE) solved this, but it's a reminder that "it works in testing" and "it works under concurrency" are very different things.

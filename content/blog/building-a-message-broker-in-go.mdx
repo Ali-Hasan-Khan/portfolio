@@ -1,0 +1,37 @@
+---
+title: "Building a Message Broker in Go"
+date: "2026-06-15"
+tags: ["Go", "Distributed Systems", "Backend"]
+readingTime: "8 min"
+wip: true
+---
+
+So I built a message broker. Not because the world needs another one, but because I kept using tools like RabbitMQ and Kafka without really understanding what was happening underneath. Figured the best way to learn was to build one from scratch.
+
+I called it Dsend. It's written in Go, and the whole thing started as an excuse to get better at Go concurrency.
+
+## What it does
+
+At its core, Dsend is pretty simple: producers push messages into queues, consumers pull them out. The tricky part is making sure messages don't get lost when things crash.
+
+I went with at-least-once delivery, which means every message gets written to disk before the producer gets a "yes, we got it" response. It's slower than fire-and-forget, but if your broker loses messages, you've basically built nothing useful.
+
+## How retries work
+
+When a consumer picks up a message and fails (maybe the service crashed, maybe the processing timed out), the message goes back into the queue after a visibility timeout. If it keeps failing after a set number of attempts, it gets shunted to a dead-letter queue.
+
+The dead-letter queue was honestly the part I spent the most time thinking about. Without it, one bad message can block your entire pipeline. With it, you can inspect what went wrong, fix it, and replay the message later.
+
+The retry logic uses exponential backoff, so failed messages wait longer and longer before each attempt. This prevents a bunch of failing messages from hammering your system all at once.
+
+## Go concurrency was the real teacher
+
+Writing the concurrent parts of Dsend taught me more about goroutines, channels, and mutexes than any course or tutorial ever did. There's a big difference between reading about concurrent access and actually debugging a race condition at 2am.
+
+The visibility timeout was the hardest piece to get right. Set it too short and slow consumers get duplicate messages. Set it too long and a crashed consumer delays everything. There's no magic number; it really depends on what your workload looks like.
+
+## What I'd do differently
+
+Honestly, the code is messy in places. If I started over, I'd spend more time on the configuration layer and probably add support for topic-based routing instead of just named queues. But for a learning project, I'm pretty happy with where it ended up.
+
+Building Dsend made me a better Go developer and gave me a much deeper appreciation for the tools we all take for granted.

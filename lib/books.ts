@@ -12,7 +12,7 @@ export const books: Book[] = [
     author: "Martin Kleppmann",
     genre: "Distributed Systems",
     status: "reading",
-    note: "Chapter 5 — Replication. Learning how distributed systems stay consistent at scale.",
+    note: "Chapter 5: Replication. Learning how distributed systems stay consistent at scale.",
   },
   {
     title: "Root Cause",

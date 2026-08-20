@@ -1,0 +1,43 @@
+---
+title: "Dsend"
+description: "A message broker built in Go with support for concurrent producers/consumers, at-least-once delivery, ack-based processing, retries, redelivery, and dead-letter queues."
+year: "2025"
+stack: ["Go", "Concurrency", "Distributed Systems"]
+status: "Shipped"
+github: "https://github.com/Ali-Hasan-Khan/dsend"
+demo: "https://dsend.alihk.tech"
+---
+
+## The Problem
+
+Message brokers sit at the heart of most distributed systems, decoupling producers from consumers and making your architecture resilient to failure. Most existing solutions are either overkill for small projects or opaque in their internals. I wanted to build one from scratch to truly understand the guarantees they provide.
+
+## Architecture
+
+Dsend is built around an append-only log. Every message is persisted before being acknowledged to the producer, which is the foundation of at-least-once delivery.
+
+Producers push messages into named queues. Consumers pull messages and must explicitly acknowledge them. If a consumer crashes mid-processing, the message is redelivered to another worker after a configurable timeout.
+
+```
+Producer → [Queue A] → Consumer 1 → ACK
+                          ↓ (timeout)
+                       Consumer 2 → ACK
+                          ↓ (max retries)
+                       [Dead Letter Queue]
+```
+
+## Key Decisions
+
+**At-least-once delivery** was non-negotiable. Every message hits disk before the producer gets a success response. This trades some write latency for reliability, which is the right trade-off for most use cases.
+
+**Ack-based processing** means consumers control the lifecycle. A message is "in flight" until explicitly acknowledged. Unacknowledged messages are redelivered after a visibility timeout.
+
+**Retries with exponential backoff** prevent thundering herds. Failed messages wait progressively longer before redelivery, with a configurable maximum attempt count.
+
+**Dead-letter queues** capture poison messages. After exhausting retries, a message is routed to a DLQ where it can be inspected, logged, or replayed instead of blocking the entire queue.
+
+## What I Learned
+
+Building Dsend taught me more about Go concurrency than any tutorial. Channels, goroutines, and sync primitives all have very different feels when you're building a system that has to be correct under concurrent access, not just fast.
+
+The hardest part was getting the visibility timeout right. Too short, and a slow consumer gets duplicate processing. Too long, and a crashed consumer delays redelivery. There's no universal answer; it depends on your workload's processing time distribution.

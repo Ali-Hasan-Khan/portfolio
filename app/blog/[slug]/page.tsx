@@ -1,10 +1,64 @@
-import Link from "next/link";
+import fs from "fs";
+import path from "path";
 import { notFound } from "next/navigation";
-import { FiArrowLeft, FiClock } from "react-icons/fi";
-import { getPostBySlug, posts } from "@/lib/posts";
+import Link from "next/link";
+import Markdown from "@/components/Markdown";
+
+const contentDir = path.join(process.cwd(), "content/blog");
+
+function parseFrontmatter(raw: string) {
+  const match = raw.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return { meta: {} as Record<string, unknown>, body: raw };
+
+  const fm: Record<string, unknown> = {};
+  match[1].split("\n").forEach((line) => {
+    const [key, ...rest] = line.split(":");
+    if (key && rest.length) {
+      const val = rest.join(":").trim();
+      if (val.startsWith("[")) {
+        fm[key.trim()] = val
+          .replace(/[\[\]"]/g, "")
+          .split(",")
+          .map((s) => s.trim());
+      } else if (val === "true") {
+        fm[key.trim()] = true;
+      } else {
+        fm[key.trim()] = val.replace(/^["']|["']$/g, "");
+      }
+    }
+  });
+
+  const body = raw.slice(match[0].length).trim();
+  return { meta: fm, body };
+}
+
+function getPost(slug: string) {
+  const mdxPath = path.join(contentDir, `${slug}.mdx`);
+  if (!fs.existsSync(mdxPath)) return null;
+
+  const raw = fs.readFileSync(mdxPath, "utf-8");
+  const { meta, body } = parseFrontmatter(raw);
+
+  return {
+    slug,
+    source: body,
+    title: (meta.title as string) ?? "Untitled",
+    date: (meta.date as string) ?? "",
+    tags: (meta.tags as string[]) ?? [],
+    readingTime: (meta.readingTime as string) ?? "",
+    wip: (meta.wip as boolean) ?? false,
+  };
+}
+
+function getAllSlugs(): string[] {
+  return fs
+    .readdirSync(contentDir)
+    .filter((f) => f.endsWith(".mdx"))
+    .map((f) => f.replace(/\.mdx$/, ""));
+}
 
 export function generateStaticParams() {
-  return posts.map((post) => ({ slug: post.slug }));
+  return getAllSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -13,9 +67,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = getPost(slug);
   if (!post) return { title: "Post Not Found" };
-  return { title: post.title };
+  return {
+    title: `${post.title} | Ali Hasan Khan`,
+    description: post.title,
+  };
 }
 
 export default async function BlogPostPage({
@@ -24,60 +81,55 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
-
-  if (!post) {
-    notFound();
-  }
+  const post = getPost(slug);
+  if (!post) notFound();
 
   return (
-    <div className="min-h-screen bg-black text-gray-300 font-mono">
-      <div className="max-w-4xl mx-0 md:mx-auto md:ml-16 px-4 py-10 md:py-20">
-        <div className="mt-10 sm:mt-20 md:mt-0 md:mb-0">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-gray-500 hover:text-white transition-colors mb-8"
-          >
-            <FiArrowLeft />
-            <span className="text-sm">Back to Blog</span>
-          </Link>
+    <article className="pt-12 sm:pt-16 md:pt-20">
+      <div className="mb-8">
+        <Link
+          href="/blog"
+          className="font-mono text-xs text-text-tertiary hover:text-text-secondary transition-colors"
+        >
+          ← All Posts
+        </Link>
+      </div>
 
-          <div className="flex items-center gap-3 mb-4">
-            <h1 className="text-3xl font-bold text-white">{post.title}</h1>
-            {post.wip && (
-              <span className="px-2 py-0.5 text-xs rounded-full bg-yellow-900/60 text-yellow-400 flex items-center gap-1">
-                WIP
-              </span>
-            )}
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 mb-8">
-            <span>{post.date}</span>
-            <span className="flex items-center gap-1">
-              <FiClock />
-              {post.readingTime}
+      <header className="mb-12">
+        <h1 className="font-display text-3xl md:text-4xl font-semibold text-text-primary tracking-tight leading-tight">
+          {post.title}
+          {post.wip && (
+            <span className="ml-3 font-mono text-sm text-text-tertiary">
+              [WIP]
             </span>
-            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2 py-0.5 text-xs rounded-full bg-gray-900/60 text-gray-400"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+          )}
+        </h1>
 
-          <div className="border-l-2 border-gray-700 pl-6 space-y-4">
-            {post.content.map((paragraph, index) => (
-              <p key={index} className="leading-relaxed">
-                {paragraph}
-              </p>
+        <div className="mt-4 flex items-center gap-4">
+          <span className="font-mono text-xs text-text-tertiary tabular-nums">
+            {post.date}
+          </span>
+          <span className="font-mono text-xs text-text-tertiary">
+            {post.readingTime}
+          </span>
+          <div className="flex items-center gap-2">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="font-mono text-[11px] text-text-tertiary tracking-wide"
+              >
+                {tag}
+              </span>
             ))}
           </div>
         </div>
+      </header>
+
+      <div className="border-t border-border mb-12" />
+
+      <div className="max-w-[65ch]">
+        <Markdown source={post.source} />
       </div>
-    </div>
+    </article>
   );
 }
