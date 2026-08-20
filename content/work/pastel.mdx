@@ -1,0 +1,31 @@
+---
+title: "Pastel"
+description: "A personal memory vault that lets users write letters to their future selves, capture special moments, and receive AI-generated summaries of their emotional journey."
+year: "2025"
+stack: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Clerk Auth"]
+status: "Shipped"
+github: "https://github.com/Ali-Hasan-Khan/pastel"
+demo: "https://pastel.alihk.tech"
+---
+
+## The Problem
+
+Journaling apps要么太复杂要么太简单. Most are just text editors with a calendar view. I wanted something that felt personal, a space where writing to your future self had weight, and where your emotional patterns surfaced over time.
+
+## Architecture
+
+Pastel is a Next.js application with a PostgreSQL backend. Clerk handles authentication, and the AI summary feature uses an LLM API to analyze entry themes and emotional arcs.
+
+The data model is straightforward: users create entries (text + mood tag + optional photo), which are organized into chronological "letters" that can be scheduled for future delivery.
+
+## Key Decisions
+
+**Clerk Auth** was chosen for speed of implementation. Building auth from scratch is a rite of passage, but for this project the focus was on the product experience, not the infrastructure.
+
+**Server Components first.** Most of the app renders on the server. Client-side JavaScript is reserved for interactive elements like the entry editor, mood picker, and real-time summary generation.
+
+**AI summaries** analyze a user's entries over a configurable window (week, month, quarter) and surface patterns: recurring themes, emotional trends, notable moments. The prompt engineering here was iterative; getting the AI to be insightful without being presumptuous was the hardest part.
+
+## What I Learned
+
+The most interesting challenge was designing for emotional weight. A journal entry isn't a tweet. It needs space, privacy, and a sense of permanence. Every design decision (typography, spacing, animation) was in service of that feeling.

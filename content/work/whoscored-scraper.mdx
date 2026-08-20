@@ -1,0 +1,30 @@
+---
+title: "Whoscored Scraper"
+description: "A web scraping tool that extracts and visualizes football match data from Whoscored.com using Selenium and mplsoccer."
+year: "2024"
+stack: ["Python", "Selenium", "Pandas", "Matplotlib", "BeautifulSoup"]
+status: "Shipped"
+github: "https://github.com/Ali-Hasan-Khan/Scrape-Whoscored-Event-Data"
+---
+
+## The Problem
+
+Football analytics requires match event data: pass maps, shot locations, defensive actions. Whoscored has rich data but no public API. I needed a way to extract this data programmatically for analysis and visualization.
+
+## Architecture
+
+The scraper uses Selenium to navigate Whoscored's JavaScript-rendered pages, captures network requests to intercept the data payloads, and parses them with Pandas into structured DataFrames.
+
+Visualizations use mplsoccer (built on Matplotlib) to render pitch maps, pass networks, and shot charts.
+
+## Key Decisions
+
+**Selenium over requests** because Whoscored renders data client-side. Static HTTP requests can't access the data. You need a real browser to execute the JavaScript.
+
+**Network interception** was the breakthrough. Instead of parsing HTML, I intercept the XHR responses that carry the actual data in JSON format. This is more reliable and faster than DOM scraping.
+
+**mplsoccer** for visualization because it handles the pitch layout, coordinate systems, and statistical overlays that would take weeks to build from scratch.
+
+## What I Learned
+
+Web scraping at scale teaches you about rate limiting, user-agent rotation, and the fragility of scraping DOM structures. The biggest lesson: always check if the data you need is available through an API or network request before trying to parse HTML.
