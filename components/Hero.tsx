@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 lg:gap-12 items-start lg:items-end pt-12 sm:pt-16 md:pt-20 lg:pt-28 pb-16 lg:pb-20">
+    <section className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6 lg:gap-10 items-start lg:items-end pt-6 sm:pt-8 md:pt-10 lg:pt-14 pb-8 lg:pb-12">
       {/* ── Name (wall of type) ──────────────────────────── */}
       <div>
         <h1 className="font-display font-bold text-text-primary tracking-tight leading-[0.9] text-[clamp(2.75rem,8vw,7.5rem)]">
