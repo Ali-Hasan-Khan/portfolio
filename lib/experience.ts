@@ -23,7 +23,7 @@ export const experiences: Experience[] = [
   },
   {
     company: "FullStacktics",
-    role: "Full Stack Engineer Intern",
+    role: "Freelance",
     period: "Mar 2025 - Apr 2025",
     duration: "2 months",
     highlights: [
