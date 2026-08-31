@@ -13,8 +13,8 @@ export default function Hero() {
       {/* ── Value statement + metadata + CTAs ─────────────── */}
       <div className="flex flex-col gap-8">
         <p className="font-sans text-text-secondary text-base md:text-lg leading-relaxed max-w-md">
-          Backend engineer building distributed systems and AI agents in{" "}
-          <span className="text-text-primary font-medium">Go</span>,
+          Backend engineer building Distributed systems and AI agents in{" "}
+          <span className="text-text-primary font-medium">Go</span>,{" "}
           <span className="text-text-primary font-medium">Python</span>, and{" "}
           <span className="text-text-primary font-medium">TypeScript</span>.
         </p>
